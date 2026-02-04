@@ -135,19 +135,19 @@ The ```GET_TEMP_READINGS``` command sends each temperature and time pair as a si
 
 ![get temp readings](assets/img_lab1/get_temp_readings.png)
 
-For the Jupyter notebook, we define a new notification handler for the RX_STRING characteristic. The ```parse_temp_readings``` callback splits the string and extracts the time and temperature to store in corresponding lists. 
+For the Jupyter notebook, we define a new notification handler for the ```RX_STRING``` characteristic. The ```parse_temp_readings``` callback splits the string and extracts the time and temperature to store in corresponding lists. 
 
 ![get temp readings](assets/img_lab1/temp_py.png)
 
 ### Task 8: Streaming vs Buffering
 
-In task 6 and 7, we explored different methods to transmit data. 
+In task 5 and 6, we explored different methods to transmit data. 
 
-Task 6 streams data, which has the advantage of providing real-time data to the computer for applications that require immediate feedback or closed-loop control. 
+Task 5 streams data, which has the advantage of providing real-time data to the computer for applications that require immediate feedback or closed-loop control. 
 
 However, the disadvantage of streaming is that its sampling rate is limited by the throughput of the BLE link. In our case, we recorded a throughput of 158.5 messages/s. If additional sensor data such as the IMU were streamed simultaneously, the available bandwidth would need to be shared across multiple data sources, which further reduces the effective sampling rate. 
 
-In task 7, we buffered time data and stored them in an array before sending them to the computer. In this case, we recorded 100 timestamps in 3 milliseconds, which is roughly 33,333 datapoints/s. 
+In task 6, we buffered time data and stored them in an array before sending them to the computer. In this case, we recorded 100 timestamps in 3 milliseconds, which is roughly 33,333 datapoints/s. 
 
 The buffering approach allows the Artemis board to record data significantly faster because data collection is no longer constrained by BLE throughput. Instead, the microcontroller can log data at the maximum rate permitted by the execution speed of the loop and memory access, making this method advantageous for high-frequency data acquisition.
 
