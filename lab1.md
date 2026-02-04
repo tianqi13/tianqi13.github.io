@@ -6,15 +6,38 @@ title: Lab 1
 
 ### Task 1: Blink
 
+This blinks the LED on the Artemis board.
+
+[![Blink](https://img.youtube.com/vi/zxs9oMbK97w/hqdefault.jpg)](https://youtube.com/shorts/zxs9oMbK97w?feature=share)
+
 
 ### Task 2: Serial Monitor 
 
+Typing a message into the Serial Monitor and pressing Enter results in the same string being published.
+
+![Serial Monitor](assets/img_lab1/serial_mon.png)
+
 ### Task 3: Analog Read
+
+Holding my finger over the microcontroller on the board shows an increase in the measured temperature of the die. 
+
+[![Temp](https://img.youtube.com/vi/o-OeKq6Iz2I/maxresdefault.jpg)](https://youtu.be/o-OeKq6Iz2I)
 
 ### Task 4: Microphone Output 
 
+I played the song "Far Above Cayuga's Waters" in the background and the microphone on the Artemis board picked up on the frequencies in this song. 
+
+[![Microphone](https://img.youtube.com/vi/MVD7o8kJlUQ/maxresdefault.jpg)](https://youtu.be/MVD7o8kJlUQ)
+
 ## Additional Tasks for ECE 5160
 ### Electronic Tuner
+The three frequencies detected by my electric tuner is 440Hz, 784Hz, and 587.3Hz. These three frequencies correspond to A4, G5, and D5 respectively. A tolerance of 5% was implemented to account for any discrepancies, as the onboard microphone introduce minor inaccuracies in the detected frequency.
+
+![Tuner](assets/img_lab1/notes.png)
+
+I generated these tones using an online tone generator, and the board could pick up on all 3 notes. 
+
+[![Tuner Video](https://img.youtube.com/vi/DSYkvzbKCD8/maxresdefault.jpg)](https://youtu.be/DSYkvzbKCD8)
 
 ## Lab 1B:
 The next part of the lab focuses on Bluetooth Low Energy (BLE) communication between a computer and the Artemis board. In this setup, the Artemis operates as a peripheral device that publishes data through GATT characteristics, while the computer functions as the central device that subscribes to and reads this data.
@@ -150,6 +173,7 @@ Data Rate = N / RTT, where N is the payload size in bytes.
 ![rtt py](assets/img_lab1/rtt_py.png)
 
 ![rtt py](assets/img_lab1/rates.png)
+
 Then, we can plot a graph of Data Rate against Payload size to better analyze the data. 
 
 ![rtt py](assets/img_lab1/graph.png)
@@ -175,7 +199,7 @@ Data was sent at about 144 packets/second.
 
 The callback function adds to a running count only if the data received from the ```RX_STRING``` characteristic matches the expected value ```"A"```, ensuring that only valid packets are counted. As shown by the total messages received, all 1000 packets were successfully detected, indicating that no packets were lost during transmission and that the BLE connection remained reliable even at a data rate of 144 packets/s.
 
-## Discussion
+## Conclusion
 
 In this lab, I learnt the fundamentals of establishing a BLE connection between a computer and an Artemis board, including how to transmit commands, set up notification handlers, and publish data to a characteristic. One challenge was accurately measuring the round trip time (RTT), as asynchronous callbacks made it difficult to determine the precise moment a response was received. This was addressed by recording timestamps to an array before sending a command and calculating the RTT within the notification callback.
 
