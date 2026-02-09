@@ -86,7 +86,7 @@ Now we observe more accurate pitch and roll readings:
 
 <div style="text-align: center;">
   <iframe width="560" height="315"
-    src="https://youtu.be/UTVPtDu3RzI?si=3wIHFu2NvPdfUONE"
+    src="https://youtu.be/UTVPtDu3RzI"
     title="Stunt"
     frameborder="0"
     allowfullscreen>
