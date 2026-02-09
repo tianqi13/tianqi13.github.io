@@ -1,3 +1,4 @@
+---
 layout: page
 title: Lab 2
 ---
