@@ -74,17 +74,24 @@ We measure the mean pitch and roll values recorded at -90° and +90°, then comp
     angle_cal = scale * angle_raw + offset
 
 Measured values:
-- Pitch: $r_{-90}$ = -87.09 , $r_{+90}$  = 88.83
-- Roll:  $r_{-90}$ = -90.71 , $r_{+90}$  = 87.88
+- Pitch: $r_{-90}$ = -89.14 , $r_{+90}$  = 86.53
+- Roll:  $r_{-90}$ = -88.38 , $r_{+90}$  = 85.223
 
 Scale and Offset:
 
-    pitch_cal = 1.0232 * pitch_raw - 0.89
-    roll_cal = 1.0079 * roll_raw + 1.43
+    pitch_cal = 1.0246 * pitch_raw + 1.34
+    roll_cal = 1.0368 * roll_raw + 1.64
 
 Now we observe more accurate pitch and roll readings:
 
-
+<div style="text-align: center;">
+  <iframe width="560" height="315"
+    src="https://youtu.be/UTVPtDu3RzI?si=3wIHFu2NvPdfUONE"
+    title="Stunt"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+</div>
 
 Similar to the buffering method implemented in Lab 1, we store 1000 sensor readings and send the data to the computer over BLE. 
 
