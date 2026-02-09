@@ -137,7 +137,10 @@ Our LPF is able to successfully attenuate high-frequency noise, and the filtered
 
 ### Task 3: Gyroscope
 Pitch, Roll and Yaw angle values from the Gyroscope readings are calculated using:
-$$θ_g = θ_{g-1} + ω_g Δt$$
+
+<div style="text-align: center;">
+  <img src="assets/img_lab2/gyro_eq.png" alt="ICM-20948 IMU" width="200"/>
+</div>
 
 Implemented in code:
 <div style="text-align: center;">
@@ -160,7 +163,9 @@ However, the gyroscope suffers from drift. Despite the IMU bring stationary, the
 The above plots demonstrate that the accelerometer and gyroscope exhibit complementary characteristics. The accelerometer provides a stable long-term reference but becomes unreliable during dynamic motion, while the gyroscope accurately captures short-term rotational changes yet accumulates drift over time. 
 
 As such, we design a complementary filter:
-$$\theta_k = (\theta_{k-1} + ω_g Δt)(1-\alpha) + \theta_{acc} \alpha$$
+<div style="text-align: center;">
+  <img src="assets/img_lab2/comp_filter_eq.png" alt="ICM-20948 IMU" width="200"/>
+</div>
 
 <div style="text-align: center;">
   <img src="assets/img_lab2/comp_filter.png" alt="ICM-20948 IMU" width="500"/>
