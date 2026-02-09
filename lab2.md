@@ -17,7 +17,7 @@ AD0_VAL specifies the least significant bit of the IMU’s 7-bit I2C address. Th
 Below is the Serial Monitor output from the Example1_Basic sketch:
 
 <div style="text-align: center;">
-  <img src="assets/img_lab2/data.png" alt="ICM-20948 IMU" width="500"/>
+  <img src="assets/img_lab2/data.png" alt="ICM-20948 IMU" width="800"/>
 </div>
 
 3 sets of data corresponding to gyroscope, accelerometer and magnetometer are printed. This screenshot was taken when the IMU was laid flat on the table, which corresponds to the near 0 values for _a_x_ and _a_y_. The measured _a_z_ value is approximately +1g, which is the upward normal force on the sensor when it is stationary on the table. 
@@ -34,10 +34,12 @@ Pitch and Roll are calculated with these equations:
 We use atan2() as it uses the signs of both readings to determine the correct quadrant that the angle lies in. 
 
 Pitch and Roll values at -90, 0, 90 are:
-<table style="margin-left:auto; margin-right:auto;">
+<div style="display: flex; justify-content: center;">
+
+<table>
   <tr>
     <td colspan="2" align="center">
-      <img src="assets/img_lab2/0deg.png" width="200"><br>
+      <img src="assets/img_lab2/0deg.png" width="300"><br>
       <sub>0 degree Pitch and Roll</sub>
     </td>
   </tr>
@@ -62,6 +64,8 @@ Pitch and Roll values at -90, 0, 90 are:
     </td>
   </tr>
 </table>
+
+</div>
 
 There are small discrepancies in the calculated pitch and roll values (not exactly 0/90/-90), so we perform two point calibration to reduce this error. 
 
@@ -126,7 +130,7 @@ Our LPF is able to successfully attenuate high-frequency noise, and the filtered
 
 ### Task 3: Gyroscope
 Pitch, Roll and Yaw angle values from the Gyroscope readings are calculated using:
-$θ_g = θ_{g-1} + ω_g Δt$
+$$θ_g = θ_{g-1} + ω_g Δt$$
 
 Implemented in code:
 <div style="text-align: center;">
@@ -149,10 +153,7 @@ However, the gyroscope suffers from drift. Despite the IMU bring stationary, the
 The above plots demonstrate that the accelerometer and gyroscope exhibit complementary characteristics. The accelerometer provides a stable long-term reference but becomes unreliable during dynamic motion, while the gyroscope accurately captures short-term rotational changes yet accumulates drift over time. 
 
 As such, we design a complementary filter:
-
-$$
-\theta_k = (\theta_{k-1} + ω_g Δt)(1-\alpha) + \theta_{acc} \alpha
-$$
+$$\theta_k = (\theta_{k-1} + ω_g Δt)(1-\alpha) + \theta_{acc} \alpha$$
 
 <div style="text-align: center;">
   <img src="assets/img_lab2/comp_filter.png" alt="ICM-20948 IMU" width="500"/>
