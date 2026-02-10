@@ -102,7 +102,7 @@ Similar to the buffering method implemented in Lab 1, we store 1000 sensor readi
 Pitch and roll values calculated from raw accelerometer data is noisy. We perform a frequency spectrum analysis to investigate the noise.
 
 <div style="text-align: center;">
-  <img src="assets/img_lab2/fft_code.png" alt="ICM-20948 IMU" width="500"/>
+  <img src="assets/img_lab2/fft_code.png" alt="ICM-20948 IMU" width="270"/>
 </div>
 
 <div style="text-align: center;">
