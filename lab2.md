@@ -86,7 +86,7 @@ Now we observe more accurate pitch and roll readings:
 
 <div style="text-align: center;">
   <iframe width="560" height="315"
-    src="https://youtu.be/UTVPtDu3RzI"
+    src="https://www.youtube.com/embed/UTVPtDu3RzI"
     title="Stunt"
     frameborder="0"
     allowfullscreen>
@@ -154,11 +154,19 @@ Plot of pitch, roll, and yaw as IMU was rotated in order of Z, X, Y axis:
 
 The angles derived from gyroscope readings accurately track rapid changes in orientation with minimal noise. In the roll graph, the accelerometer shows a negative dip while the gyroscope remains near zero because the IMU is rotating about the Y axis (pitch), which introduces linear acceleration that corrupts the accelerometer-based roll estimate. 
 
-However, the gyroscope suffers from drift. Despite the IMU bring stationary, the angles calculated increase with time due to the accumulation of small bias errors during integration.
+However, the gyroscope suffers from drift. Despite the IMU being stationary in the experiment below, the angles calculated increase with time due to the accumulation of small bias errors during integration.
 
 <div style="text-align: center;">
   <img src="assets/img_lab2/drift.png" alt="ICM-20948 IMU" width="500"/>
 </div>
+
+We can reduce the sampling frequency by sending a parameter (delay) when the computer sends the GET_IMU_VAL command. Here, the delay is set to 10ms. 
+
+<div style="text-align: center;">
+  <img src="assets/img_lab2/low_samp.png" alt="ICM-20948 IMU" width="500"/>
+</div>
+
+A lower sampling frequency of ~90Hz shows considerable drift from the gyroscope readings, and the pitch and yaw values computed from gyro readings diverge significantly from the accelerometer values. 
 
 The above plots demonstrate that the accelerometer and gyroscope exhibit complementary characteristics. The accelerometer provides a stable long-term reference but becomes unreliable during dynamic motion, while the gyroscope accurately captures short-term rotational changes yet accumulates drift over time. 
 
