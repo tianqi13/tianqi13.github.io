@@ -172,7 +172,7 @@ The above plots demonstrate that the accelerometer and gyroscope exhibit complem
 
 As such, we design a complementary filter:
 <div style="text-align: center;">
-  <img src="assets/img_lab2/comp_filter_eq.png" alt="ICM-20948 IMU" width="200"/>
+  <img src="assets/img_lab2/comp_filter_eq.png" alt="ICM-20948 IMU" width="280"/>
 </div>
 
 <div style="text-align: center;">
@@ -212,7 +212,7 @@ The main loop of the Arduino runs at roughly 2383.0Hz, 7x faster than the IMU pr
 
 In this lab, I chose to have separate arrays for storing Accelerometer and Gyroscope data. This method is more organized and code is more readable, especially when sending data over BLE.
 
-Floats were used because the IMU returns floating point values, and the -$\pi$ to $\pi$ angle range requires sufficient precision to avoid quantization errors. Floats are also 4 bytes, which are memory efficient when compared to strings and doubles. 
+Floats were used because the IMU returns floating point values, and the -π to π angle range requires sufficient precision to avoid quantization errors. Floats are also 4 bytes, which are memory efficient when compared to strings and doubles. 
 
 My program uses 6 arrays: time, pitch, roll (from accelerometer), omegaX, Y, Z (from gyroscope). Setting each of them to length 5000 gives a compile time message:
 
