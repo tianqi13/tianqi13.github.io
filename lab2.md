@@ -242,4 +242,3 @@ Recording 5000 readings corresponds to approximately 18 seconds of raw sensor da
 The car reacts quickly and accelerates rapidly once commanded by the controller. It is able to turn on the spot if the right button is held down, but it often catches an edge and flips. 
 
 
-
