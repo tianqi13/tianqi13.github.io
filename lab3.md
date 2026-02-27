@@ -185,6 +185,9 @@ Next, I tested the ToF performance on 4 different textures.
 | Green Cloth   | 1.026   |
 | Shiny Metallic | 1.009 |
 
-Whilst surface color may have contributed to some variation, we can observe that more reflective and smoother surfaces give rise to more accurate readings. The shiny metallic surface gave a highly accurate reading, followed by the smooth wooden plank, plastic, and finally the green cloth. Specular surfaces return a stronger, more coherent IR pulse to the receiver, whereas rough or absorbent surfaces scatter/ attenuate the signal, introducing measurement error.
+Whilst surface color may have contributed to some variation, we can observe that more reflective and smoother surfaces give rise to more accurate readings. The shiny metallic surface gave a highly accurate reading, followed by the smooth wooden plank, plastic, and finally the green cloth. Specular surfaces return a stronger, more coherent IR pulse to the receiver, whereas rough surfaces scatter/ attenuate the signal, introducing measurement error.
+
+### References 
+I referenced Aidan Derocher's page from S25, as well as John E KVAM's response in a STMicroelectronics forum to understand how to program the 2 ToF sensors with different addresses. 
 
 
