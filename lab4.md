@@ -48,7 +48,7 @@ The overall set up is shown in the video below:
 The square wave recorded shows a duty cycle of 50%. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab4/osc.png" alt="Wiring Diagram" width="400"/>
+  <img src="assets/img_lab4/osc.png" alt="Wiring Diagram" width="550"/>
 </div>
 
 The H-bridge in the motor driver connects the motor to the supply voltage during the HIGH portion of the output square wave and disconnects it during the LOW portion. Increasing the duty cycle directly increases the average voltage and power delivered to the motor, causing them to spin faster. 
