@@ -139,7 +139,7 @@ I obtained a calibration factor of 2.3. A video of the car moving in a straight 
 
 <div style="text-align: center;">
   <iframe width="560" height="315"
-    src="https://www.youtube.com/embed/hPMHl9oVOG4"
+    src="https://www.youtube.com/embed/21BVQSZsMuQ"
     title="Stunt"
     frameborder="0"
     allowfullscreen>
@@ -173,7 +173,7 @@ I tuned `running_pwm` until the motors could just continue coasting, and obtaine
 
 <div style="text-align: center;">
   <iframe width="560" height="315"
-    src="https://www.youtube.com/embed/6CKLXg8hucE"
+    src="https://www.youtube.com/embed/hPMHl9oVOG4"
     title="Coasting"
     frameborder="0"
     allowfullscreen>
