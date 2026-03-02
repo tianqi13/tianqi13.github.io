@@ -92,11 +92,11 @@ This video shows both motors rotating in both directions, powered by the battery
 Finally, I attached all components to the car, including the sensors, batteries, and QWICC connect. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab4/back.png" alt="Back of Car" width="400"/>
+  <img src="assets/img_lab4/back.png" alt="Back of Car" width="500"/>
 </div>
 
 <div style="text-align: center;">
-  <img src="assets/img_lab4/front.png" alt="Front of Car" width="400"/>
+  <img src="assets/img_lab4/front.png" alt="Front of Car" width="500"/>
 </div>
 
 ### PWM Limits
@@ -152,7 +152,7 @@ I obtained a calibration factor of 2.3. A video of the car moving in a straight 
 We can calculate the default frequency of analogWrite() using the oscilloscope.   
 
 <div style="text-align: center;">
-  <img src="assets/img_lab4/measurement.png" alt="Frequency" width="400"/>
+  <img src="assets/img_lab4/measurement.png" alt="Frequency" width="550"/>
 </div>
 
 5 cycles of the square wave across 7 time divisions gives a frequency of ~178Hz, which is on the lower end. (Note: A more accurate frequency could be obtained from the oscilloscope measurement function, but I already soldered the motor driver outputs before this part so I could not rerun this experiment.)
