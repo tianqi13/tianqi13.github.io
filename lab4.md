@@ -17,6 +17,8 @@ Each motor driver is capable of driving signals to two DC motors. To deliver twi
   <img src="assets/img_lab4/wiring.png" alt="Wiring Diagram" width="500"/>
 </div>
 
+I chose to use pins A15 and A16 for the motor driver 1, and pins A3 and A14 for motor driver 2. These pins can output PWM signals, which is essential to control our motor drivers. 
+
 
 ### Battery: 
 
@@ -101,7 +103,7 @@ Finally, I attached all components to the car, including the sensors, batteries,
 
 ### PWM Limits
 
-To find the lower limit in PWM value for which the robot moves, I first programmed both motors with a PWM of 10 and incremented the value until the motors started spinning when lifted in the air. 
+To find the lower limit in PWM value for which the robot moves, I first programmed both motors with a PWM of 10 and incremented the value until the motors were able to move the car. 
 
 | Motor      | Lower Limit PWM |
 |------------|-----------------|
@@ -140,6 +142,18 @@ I obtained a calibration factor of 2.3. A video of the car moving in a straight 
 <div style="text-align: center;">
   <iframe width="560" height="315"
     src="https://www.youtube.com/embed/_CxTVK3UeO4"
+    title="Straight Line"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+</div>
+
+### Open Loop Control 
+
+Here is a video of my car turning right:
+<div style="text-align: center;">
+  <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/6wUFsdjqHb4"
     title="Straight Line"
     frameborder="0"
     allowfullscreen>
