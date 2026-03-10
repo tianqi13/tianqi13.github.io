@@ -57,7 +57,7 @@ Given $PID = K_p (x-x_{goal})$, and the range of our ToF sensor is 1300mm (short
 I first started with only P control, Kp = 0.15. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab5/onlyP.png" alt="loop" width="500"/>
+  <img src="assets/img_lab5/onlyP.png" alt="loop" width="560"/>
 </div>
 
 From the graph, we see that the car moves quickly to the set point, but there is considerable overshoot and oscillation. Therefore I decided to incorporate a D term, to remove oscillations. 
@@ -65,7 +65,7 @@ From the graph, we see that the car moves quickly to the set point, but there is
 I started with a value of 0.05 and slowly decremented it until 0.02, where I saw less overshoot and minimal oscillations.
 
 <div style="text-align: center;">
-  <img src="assets/img_lab5/pd_control.png" alt="loop" width="500"/>
+  <img src="assets/img_lab5/pd_control.png" alt="loop" width="560"/>
 </div>
 
 The two latter peaks are from when I kicked the car, and the car moved back to place quickly. 
@@ -73,7 +73,7 @@ The two latter peaks are from when I kicked the car, and the car moved back to p
 Whilst I did not observe a steady state error, I decided to add a Ki term in situations where the car is moving on rougher (higher friction/inertia) surfaces, and Kp/Kd terms are insufficient to move the car to the set point. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab5/PID.png" alt="loop" width="500"/>
+  <img src="assets/img_lab5/PID.png" alt="loop" width="560"/>
 </div>
 
 The car moves quickly towards the setpoint and settles within ~2 seconds with minimal overshoot. It moves back to the setpoint quickly despite perturbances, due to the new I-term. 
@@ -113,7 +113,7 @@ I ran into an issue where the car would not move, and the D-term was 0. It only 
 Similarly, the d-term spikes because the control loop runs so fast that dt is very small, so every new tof readings causes large jumps.
 
 <div style="text-align: center;">
-  <img src="assets/img_lab5/der.png" alt="loop" width="500"/>
+  <img src="assets/img_lab5/der.png" alt="loop" width="560"/>
 </div>
 
 As such, I added a LPF for der_error. 
@@ -125,7 +125,7 @@ As such, I added a LPF for der_error.
 With the above, the control loop runs 146 times per second, and the car operates more smoothly. We observe this below where the PWM values are updated more frequently. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab5/done.png" alt="loop" width="500"/>
+  <img src="assets/img_lab5/done.png" alt="loop" width="560"/>
 </div>
 
 ### Analysis of System 
@@ -146,9 +146,9 @@ This video demonstrates 3 successful runs with the car, from 304mm to 250mm to 2
 The plots are shown below, the car moves very close to the set point. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab5/300.png" alt="loop" width="500"/>
-  <img src="assets/img_lab5/250.png" alt="loop" width="500"/>
-  <img src="assets/img_lab5/200.png" alt="loop" width="500"/>
+  <img src="assets/img_lab5/300.png" alt="loop" width="560"/>
+  <img src="assets/img_lab5/250.png" alt="loop" width="560"/>
+  <img src="assets/img_lab5/200.png" alt="loop" width="560"/>
 </div>
 
 #### Maximum Speed 
@@ -156,7 +156,7 @@ The plots are shown below, the car moves very close to the set point.
 Plotting a speed graph: 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab5/done.png" alt="loop" width="500"/>
+  <img src="assets/img_lab5/max_speed.png" alt="loop" width="560"/>
 </div>
 
 The maximum linear speed achieved by my car is ~2m/s, at the beginning where the car is furthest away from the set point. 
@@ -166,7 +166,7 @@ The maximum linear speed achieved by my car is ~2m/s, at the beginning where the
 When the car starts far from the wall, the I-term accumulates a large error over the long approach.
 
 <div style="text-align: center;">
-  <img src="assets/img_lab5/windup.png" alt="loop" width="500"/>
+  <img src="assets/img_lab5/windup.png" alt="loop" width="560"/>
 </div>
 
 From the plot above, even when the error is negative and the car should be moving away from the wall, the i-term remains positive due to integrator windup and drives the car further into the wall.
@@ -180,7 +180,7 @@ To mitigate this, I added a wind-up protection to my code.
 I increased Ki to better observe its effects. The i-term plateaus past a maximum point. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab5/integrator.png" alt="loop" width="500"/>
+  <img src="assets/img_lab5/integrator.png" alt="loop" width="560"/>
 </div>
 
 Now, even if I hold the car still at the beginning and allow error to accumulate, the car does not zoom straight into the wall when I release it.
