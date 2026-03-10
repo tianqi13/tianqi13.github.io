@@ -33,6 +33,7 @@ In the case where the bluetooth disconnects, the Artemis is programmed to stop t
 There are a few considerations for designing the PID controller: 
 
 #### Deadband and Calibration Factor
+
 | Motor      | Lower Limit PWM |
 |------------|-----------------|
 | Left       | 70              |
