@@ -70,7 +70,9 @@ I started with a value of 0.05 and slowly decremented it until 0.02, where I saw
 
 The two latter peaks are from when I kicked the car, and the car moved back to place quickly. 
 
-Whilst I did not observe a steady state error, I decided to add a Ki term in situations where the car is moving on rougher (higher friction/inertia) surfaces, and Kp/Kd terms are insufficient to move the car to the set point. 
+I observed a steady-state error for smaller setpoints, where the car approaches quickly but stalls short of the goal. The P and D term alone becomes too small to overcome static friction near the setpoint.
+
+As such, I added a small Ki term, and incremented it until steady state error was eliminated.
 
 <div style="text-align: center;">
   <img src="assets/img_lab5/PID.png" alt="loop" width="560"/>
