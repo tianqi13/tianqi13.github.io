@@ -188,7 +188,14 @@ To stop the motors, I created a command STOP_MOTORS that turns the stopMotors_fl
 PID control can be restarted by running the START_YAW_PID_AND_RECORD command. 
 
 #### Controlling direction and orientation at the same time 
-In lab 5, the sign of the PID control informs us of how to control the motors, and both motors spin in the same direction to move the car forward or backwards. To implement directional and orientation control at the same time, 
+We can calculate the linear PID and orientation PID in the same control loop, and then apply differential drive mixing for the robot to change its linear and angular speed. 
+
+For example, the linear PID might give a PID value to move forward, and the orientation PID might give a command to turn right. Then, the command written to the motors would be:
+
+left: speed_PID + orientation_PID
+right: speed_PID - orientation_PID
+
+The left wheels will spin faster and the robot moves forward whilst turning right. To make this implementation easier, we can move the PID calculations to a function that we call from the command. 
 
 ### Sampling Time 
 
