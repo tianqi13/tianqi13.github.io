@@ -30,24 +30,37 @@ There are 2 ways to ensure that the FIFO queue remains empty:
 1. Every time we read from the FIFO, we also clear the FIFO. I included the following code snippet in both the void loop() as well as the PID control loop. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/DMP.png" alt="ICM-20948 IMU" width="350"/>
+  <img src="assets/img_lab6/DMP.png" alt="ICM-20948 IMU" width="500"/>
 </div>
 
 2. Lower the output data rate(ODR). My control loop from Lab 5 ran at around 100Hz, which is much faster than the default 55Hz ODR. Therefore, I decided not to lower it. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/ODR.png" alt="ICM-20948 IMU" width="350"/>
+  <img src="assets/img_lab6/ODR.png" alt="ICM-20948 IMU" width="500"/>
 </div>
 
 #### Gyroscope Range
 The maximum rotational velocity of the gyroscope is +-2000 degrees per second. This is sufficient for our car, because even a full flip under gravity would not exceed this limit. We can program the range by changing the value of the GYRO_FS_SEL register:
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/gyro_range.png" alt="ICM-20948 IMU" width="400"/>
-  <img src="assets/img_lab6/program.png" alt="ICM-20948 IMU" width="400"/>
+  <img src="assets/img_lab6/gyro_range.png" alt="ICM-20948 IMU" width="500"/>
+  <img src="assets/img_lab6/program.png" alt="ICM-20948 IMU" width="500"/>
 </div>
 
 ### Lab: 
+
+### Code Setup 
+Similar to lab 5, I implemented a command START_PID_YAW_AND_RECORD, which starts the control loop. 
+<div style="text-align: center;">
+  <img src="assets/img_lab6/code.png" alt="ICM-20948 IMU" width="450"/>
+</div>
+
+The writeMotors command is updated for differential drive:
+<div style="text-align: center;">
+  <img src="assets/img_lab6/diff.png" alt="ICM-20948 IMU" width="450"/>
+</div>
+
+With the above implemented, we can move onto PID tuning. 
 
 ### PID tuning 
 #### P-term
@@ -56,19 +69,19 @@ The gyroscope has a range of -180 to +180. With clamping, the maximum error is 1
 When I first started tuning Kp, I realised that the car would spin rapidly, especially around the boundaries 180/-180 and 0/-0. This caused the error to jump to 360. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/no_wrap.png" alt="ICM-20948 IMU" width="350"/>
+  <img src="assets/img_lab6/no_wrap.png" alt="ICM-20948 IMU" width="550"/>
 </div>
 
 As such, I introduced a wrap-around for error:
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/wrap.png" alt="ICM-20948 IMU" width="350"/>
+  <img src="assets/img_lab6/wrap.png" alt="ICM-20948 IMU" width="450"/>
 </div>
 
 Another issue I noticed with setting Kp to be near 1 is that for small errors, the PWM value is too small to overcome friction and allow the car to rotate. Therefore, I increased Kp to 3.
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/kp.png" alt="ICM-20948 IMU" width="500"/>
+  <img src="assets/img_lab6/kp.png" alt="ICM-20948 IMU" width="550"/>
 </div>
 
 #### D-term
@@ -76,7 +89,7 @@ Another issue I noticed with setting Kp to be near 1 is that for small errors, t
 To reduce oscillations, I introduced Kd. Similar to wrapping the error values, I also added a check for delta_error:
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/der_wrap.png" alt="ICM-20948 IMU" width="350"/>
+  <img src="assets/img_lab6/der_wrap.png" alt="ICM-20948 IMU" width="450"/>
 </div>
 
 ##### Taking Derivatives 
@@ -88,17 +101,17 @@ Typically, the gyroscope returns yaw acceleration values, which we integrate to 
 The D-term is sensitive to any changes in angle, even noise from the DMP readings. As such, the car oscillates in place once it has reached its set point, even though the d-term is supposed to reduce oscillations. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/no_lp.png" alt="ICM-20948 IMU" width="500"/>
+  <img src="assets/img_lab6/no_lp.png" alt="ICM-20948 IMU" width="550"/>
 </div>
 
 As such, similar to lab 5, we write a LP filter for the d-term.
 <div style="text-align: center;">
-  <img src="assets/img_lab5/lp.png" alt="ICM-20948 IMU" width="500"/>
+  <img src="assets/img_lab5/lp.png" alt="ICM-20948 IMU" width="550"/>
 </div>
 
 This results in less jitter around the set point.
 <div style="text-align: center;">
-  <img src="assets/img_lab6/kd.png" alt="ICM-20948 IMU" width="500"/>
+  <img src="assets/img_lab6/kd.png" alt="ICM-20948 IMU" width="550"/>
 </div>
 
 ##### Derivative Kick 
@@ -106,7 +119,7 @@ This results in less jitter around the set point.
 Next, I set 3 consecutive setpoints: 0, 90, 180. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/der_kick.png" alt="ICM-20948 IMU" width="500"/>
+  <img src="assets/img_lab6/der_kick.png" alt="ICM-20948 IMU" width="550"/>
 </div>
 
 The d-term spikes when the setpoint is changes, because the error becomes very large and so does its derivative. 
@@ -120,7 +133,7 @@ To circumvent the derivative kick, I differentiate the measured yaw directly ins
 As such, the derivative term no longer peaks at setpoint changes. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/prot.png" alt="ICM-20948 IMU" width="500"/>
+  <img src="assets/img_lab6/prot.png" alt="ICM-20948 IMU" width="550"/>
 </div>
 
 #### I-term
@@ -128,7 +141,7 @@ As such, the derivative term no longer peaks at setpoint changes.
 Lastly, I introduced Ki. First, I wanted to encourage the system to react faster to changes in setpoint, which the additional i-term would contribute to. More importantly, I wanted to minimize any steady-state errors. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab6/final.png" alt="ICM-20948 IMU" width="500"/>
+  <img src="assets/img_lab6/final.png" alt="ICM-20948 IMU" width="550"/>
 </div>
 
 We first observe the large changes in yaw when the setpoint is 180 degrees: at this boundary, the sign flips. Nonetheless, our P, I and D terms all stay low because our error is wrapped to [-180, 180], ensuring the controller always takes the shortest angular path and sees only a small error at the boundary.
@@ -173,6 +186,9 @@ To stop the motors, I created a command STOP_MOTORS that turns the stopMotors_fl
 </div>
 
 PID control can be restarted by running the START_YAW_PID_AND_RECORD command. 
+
+#### Controlling direction and orientation at the same time 
+In lab 5, the sign of the PID control informs us of how to control the motors, and both motors spin in the same direction to move the car forward or backwards. To implement directional and orientation control at the same time, 
 
 ### Sampling Time 
 
