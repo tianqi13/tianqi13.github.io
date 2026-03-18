@@ -234,7 +234,9 @@ Hence, similar to lab 5, we add an integrator windup protection.
 
 Although the car was held in place at the start, the error does not accumulate as the p-term has already caused the PID control to be maximised. Therefore, there is no overshoot after the car is released. 
 
+### References: 
 
+I referenced Stephan Wagner's DMP tutorial to set up DMP for this lab. 
 
 
 
