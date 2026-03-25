@@ -58,6 +58,7 @@ $$m = \frac{-d\cdot{t_{90}}}{\ln(0.1)}$$
 #### A and B matrix and discretization 
 
 I found A and B matrices to be: 
+
 $$A = \begin{bmatrix} 0 & 1 \\ 0 & -1.36 \end{bmatrix}, \quad B_d = \begin{bmatrix} 0 \\ 8.01 \end{bmatrix}$$
 
 I then discretized them using a sampling period of 0.2s. 
