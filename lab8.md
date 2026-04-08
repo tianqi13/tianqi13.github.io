@@ -12,7 +12,7 @@ title: Lab 8
 ### Prelab
 In this lab, I got my robot to perform a drift. This required distance measurements, which I used a Kalman Filter for, as well as yaw measurements which I used a Digital Motion Processor for. 
 
-In Lab 7, I implemeneted a kalmanFilter() function that takes in a update flag. If there is a new sensor reading, we run both the prediction and update step. Otherwise, we run the prediction step. This function is used in my DRIFT command, as shown below:
+In Lab 7, I implemented a kalmanFilter() function that takes in a update flag. If there is a new sensor reading, we run both the prediction and update step. Otherwise, we run the prediction step. This function is used in my DRIFT command, as shown below:
 
 <div style="text-align: center;">
   <img src="assets/img_lab8/kalman.png" alt="ICM-20948 IMU" width="450"/>
@@ -28,7 +28,7 @@ Similarly, I utilised the DMP for yaw values. One change I made was to add a yaw
   <img src="assets/img_lab8/DMP.png" alt="ICM-20948 IMU" width="450"/>
 </div>
 
-With these sensor readings in place, we can move on to implementing drift. 
+With these sensor readings in place, we can move on to implementing the drift stunt.  
 
 ### Stunt: Drift
 
@@ -63,7 +63,7 @@ I recorded the distance and yaw measurements, as well as motor outputs. Through 
 #### Distance Measurement   
 
 <div style="text-align: center;">
-  <img src="assets/img_lab8/distance.png" alt="ICM-20948 IMU" width="400"/>
+  <img src="assets/img_lab8/distance.png" alt="ICM-20948 IMU" width="500"/>
 </div>
 
 The orange line shows the Kalman filter distance estimates, which are noticeably smoother than the raw ToF values (light blue). Between ToF samples, the Kalman filter provides continuous distance predictions, allowing the robot to start turning earlier than if it relied solely on the raw ToF measurements.
@@ -71,7 +71,7 @@ The orange line shows the Kalman filter distance estimates, which are noticeably
 #### Yaw measurement
 
 <div style="text-align: center;">
-  <img src="assets/img_lab8/yaw.png" alt="ICM-20948 IMU" width="400"/>
+  <img src="assets/img_lab8/yaw.png" alt="ICM-20948 IMU" width="500"/>
 </div>
 
 The Yaw measurments show that the robot turns fairly quickly. It completes the 180 degree turn with barely any overshoot within 0.44 seconds. 
@@ -85,7 +85,7 @@ The Yaw measurments show that the robot turns fairly quickly. It completes the 1
 A different set of PID gains was used compared to Lab 6. Kp was increased significantly to ensure the robot turns aggressively, while Ki and Kd were reduced. Since the ±15 degree tolerance band means the robot only needs to get in the ballpark of 180 degrees before moving on, exact precision was not a priority here.
 
 <div style="text-align: center;">
-  <img src="assets/img_lab8/pwm.png" alt="ICM-20948 IMU" width="300"/>
+  <img src="assets/img_lab8/pwm.png" alt="ICM-20948 IMU" width="500"/>
 </div>
 
 PID control in the APPROACHING state is turned off, so all values are 0.
