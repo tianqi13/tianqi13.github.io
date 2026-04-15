@@ -81,13 +81,13 @@ For precision, I took 2 sets of measurements at (0,0) and plotted them on the sa
 The first transformation is from ToF frame to Robot frame. There is no rotation between the two frames, but the ToF is positioned 69mm from the center of the Robot. As such, we add 69 to all ToF readings to account for this frame change. Then, we can convert cartesian coordinates to coordinates in the Robot frame. 
 
 <div style="text-align: center;">
-  <img src="assets/img_lab9/process.png" alt="ICM-20948 IMU" width="250"/>
+  <img src="assets/img_lab9/process.png" alt="ICM-20948 IMU" width="450"/>
 </div> 
 
 The second transformation is from Robot to World frame. As we ensured that the robot and world frame share the same axis orientation during data collection, the rotation matrix is the identity matrix (alpha = 0). We multiply each (x,y) coordinate in robot frame with the transformation matrix.
 
 <div style="text-align: center;">
-  <img src="assets/img_lab9/transformation.png" alt="ICM-20948 IMU" width="250"/>
+  <img src="assets/img_lab9/transformation.png" alt="ICM-20948 IMU" width="450"/>
 </div> 
 
 Using the functions above, we convert all scans to world frame coordinates, and plot them together. 
