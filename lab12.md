@@ -115,7 +115,7 @@ A successful run is shown below:
   </iframe>
 </div>
 
-The logs printed during running are:
+The logs printed during running are (only 2 shown for brevity):
 <div style="text-align: center;">
   <img src="assets/img_lab12/logs.png" alt="ICM-20948 IMU" width="450"/>
 </div>
@@ -129,5 +129,5 @@ A big drawback of this open loop control strategy is the lack of positional feed
 #### Conclusion
 This lab was one of the harder labs for me in this course, especially because it ties everything we worked on in previous labs together. For previous labs, each element was executed in isolation, but in this one, elements were chained one after another, meaning any failure along the way could throw off the entire run. 
 
-I had to go back to the drawing board many times, tuning PID parameters and even the two motor calibrations so that the robot could move precisely enough to complete a full run. If I had more time, I would continue working on a closed-loop design and perhaps integrate some kind of decision tree between the belief confidence and the open-loop fallback, switching between the two depending on how confident the belief estimate is.
+I had to go back to the drawing board many times, tuning PID parameters and even the two motor calibrations so that the robot could move precisely enough to complete a full run. My ToF sensor was also behaving very inconsistently throughout the lab, and I tried my best to minimize its variance, but localization and the linear PID were fully dependent on its readings. If I had more time, I would continue working on a closed-loop design and perhaps integrate some kind of decision tree between the belief confidence and the open-loop fallback, switching between the two depending on how confident the belief estimate is.
 
