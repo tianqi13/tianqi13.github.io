@@ -49,7 +49,7 @@ To circumvent the timing issue, I decided to run the update step every other set
 
 I did not expect to have such a big error in my belief estimate, because my robot localized quite well (within ~0.3m of ground truth) in Lab 11. Furthermore, the errors were very non-deterministic. Running identical code from the same position would frequently yield two substantially different belief estimates. 
 
-One reason for these errors could be due to the large variance from large ToF values. With the robot at the bottom left corner of the arena and pointing towards the upper right, ToF values can range wildly from 2600mm to 3800mm. 
+One reason for these errors could be due to the large variance from large ToF values. I realized that localization is poor when a portion of the readings are taken across a large, open space. For example, with the robot at the bottom left corner of the arena and pointing towards the upper right, ToF values can range wildly from 2600mm to 3800mm. 
 
 I tried adjusting the ToF sensor angle and applying a low-pass filter, but repeated runs still produced erroneous predictions. Since even a single bad belief estimate can derail the entire navigation, I opted to move away from closed-loop control in favor of hitting more set points reliably.
 
@@ -69,9 +69,9 @@ First, the angle between 2 points are calculated using the ``target_angle`` func
   <img src="assets/img_lab12/target_ang.png" alt="ICM-20948 IMU" width="450"/>
 </div>
 
-Note that the +x axis of the arena (stretching from left to right) is taken as the 0° reference, with angles increasing counter-clockwise. However, the IMU's yaw output is horizontally flipped, so the target angle is negated.
+Note that the +x axis of the arena (stretching from left to right) is taken as the 0° reference, with angles increasing counter-clockwise. However, the IMU's reference frame is horizontally flipped from the world frame, so the target angle is negated before being passed to the Artemis. 
 
-Then, Yaw PID is executed so the robot turns to face the next point. 
+Then, yaw PID is executed so the robot turns to face the next point. 
 <div style="text-align: center;">
   <img src="assets/img_lab12/angle.png" alt="ICM-20948 IMU" width="450"/>
 </div>
@@ -96,7 +96,7 @@ I added flags to signal when the linear and yaw PID were complete. The stopping 
 1. Yaw: Absolute error smaller than 3 degrees, and angular position has been held for more than 3 seconds. 
 2. Linear: Absolute error smaller than 50mm, and time since loop start is more than 5 seconds. 
 
-I also tried a position-held criteria for the linear loop (similar to yaw), but the large variance in ToF readings made this unreliable. Even when the robot was physically stationary, small fluctuations in the sensor output caused the error to drift below and above of the threshold, preventing the loop from ever finishing.
+I also tried a position-held criteria for the linear loop (similar to yaw), but the large variance in ToF readings made this unreliable. Even when the robot was physically stationary, small fluctuations in the sensor output caused the error to drift below and above of the threshold, preventing the loop from ever returning.
 
 The code above is encapsulated in a ``path_planning`` function, which is called 8 times in a loop to navigate through all 9 waypoints.
 
@@ -123,11 +123,13 @@ The logs printed during running are (only 2 shown for brevity):
 #### Evaluation 
 In general, the open loop control works well, and the robot navigates successfully around the arena. It hits all set points except the final one (0,0). The robot does not end up exactly at each setpoint, instead ending up around 30 centimeters away from each spot. An entire run is completed in about 1.5 minutes. 
 
+The robot performs well when navigating towards edged backed by walls, as the ToF sensor has a clear, flat surface to range against. However the diagonal moves (like waypoint 1->2 and 3->4) are difficult, because the ToF sensor is positioned at an angle towards the wall in these cases, which causes larger variance in the ToF readings. This throws off the PID control loop and is where I observed the most frequent failures. 
+
 A big drawback of this open loop control strategy is the lack of positional feedback. The system has no way of knowing the robot's actual location in the arena, and as such any errors would be propagated form one way point to another. This is observed between setpoints 
 5 and 6 (setpoint 6 is just 1ft above setpoint 5). Because the robot simply assumes it has reached its target upon completing each movement command, it treats its stopping point as set point 5. It then moves 1 foot upward from that incorrect position, causing it to overshoot and miss set point 6 by half a foot.
 
 #### Conclusion
 This lab was one of the harder labs for me in this course, especially because it ties everything we worked on in previous labs together. For previous labs, each element was executed in isolation, but in this one, elements were chained one after another, meaning any failure along the way could throw off the entire run. 
 
-I had to go back to the drawing board many times, tuning PID parameters and even the two motor calibrations so that the robot could move precisely enough to complete a full run. My ToF sensor was also behaving very inconsistently throughout the lab, and I tried my best to minimize its variance, but localization and the linear PID were fully dependent on its readings. If I had more time, I would continue working on a closed-loop design and perhaps integrate some kind of decision tree between the belief confidence and the open-loop fallback, switching between the two depending on how confident the belief estimate is.
+I had to go back to the drawing board many times, tuning PID parameters and even the two motor calibrations so that the robot could move precisely enough to complete a full run. My ToF sensor was also behaving very inconsistently throughout the lab, and I tried my best to minimize its variance but localization and the linear PID were fully dependent on its readings. If I had more time, I would continue working on a closed-loop design and perhaps integrate some kind of decision tree between the belief confidence and the open-loop fallback, switching between the two depending on how confident the belief estimate is.
 
